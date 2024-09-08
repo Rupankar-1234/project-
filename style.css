@@ -57,8 +57,19 @@ h1 {
     border-radius: 10px;
 }
 
+/* Glow effect for text on hover within tab content */
 .tab-content h2, .tab-content p {
     margin: 10px 0;
+    transition: box-shadow 0.3s, color 0.3s;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.tab-content h2:hover, .tab-content p:hover {
+    box-shadow: 0 0 10px #ffcc00, 0 0 15px #ff9900;
+    color: #ff9900;
+    background-color: #f4f4f4;
+    transition: color 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
 .tab-content img {
@@ -79,31 +90,48 @@ a:hover {
     color: #333;
 }
 
-/* Developer Section */
-h1 {
-    margin-top: 40px;
+/* Developer Section Styling */
+.developers-section {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.developers-section h1 {
     color: #ff9900;
+    font-size: 2.5em;
+    margin-bottom: 30px;
 }
 
-hr {
-    border: 1px solid #ff9900;
+.developer-names {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
-p {
-    color: #333;
+.developer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-a {
-    color: #ff9900;
+.developer:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ffcc00, 0 0 30px #ff9900;
 }
 
-a:hover {
-    color: #555;
+.developer a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
 }
 
-/* Add a smooth transition effect */
-body {
-    transition: background-color 0.5s, color 0.5s;
+.developer a:hover {
+    color: #fff;
 }
 
 /* Media Queries for responsiveness */
@@ -112,8 +140,16 @@ body {
         padding: 10px;
         font-size: 14px;
     }
-    
+
     .tab-content {
         width: 95%;
+    }
+
+    .developer-names {
+        flex-direction: column;
+    }
+
+    .developer {
+        width: 90%;
     }
 }
