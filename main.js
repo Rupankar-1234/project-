@@ -1,65 +1,47 @@
-// JavaScript code
 const container = document.getElementById("container");
 const imageOne = document.querySelector(".image-1");
 const imageTwo = document.querySelector(".image-2");
 const btnYes = document.querySelector(".btn-yes");
 
 // Function to create a new "No" button
-function createNewNoButton() {
+function createNoButton() {
   const newBtnNo = document.createElement("button");
-  newBtnNo.classList.add("btn", "btn-no");
+  newBtnNo.className = "btn btn-no";
   newBtnNo.innerText = "No";
-  newBtnNo.style.position = "absolute"; // Ensure it's positioned absolutely
   container.appendChild(newBtnNo);
 
-  // Randomly position the new button
-  positionButton(newBtnNo);
-
-  // Add mouseover event listener for the new button
-  newBtnNo.addEventListener("mouseover", () => {
-    positionButton(newBtnNo);
-  });
-
-  // Add click event listener for the new button
-  newBtnNo.addEventListener("click", (e) => {
-    imageOne.classList.add("hide");
-    imageTwo.classList.remove("hide");
-    newBtnNo.classList.add("hide");
-  });
-}
-
-function positionButton(button) {
+  // Randomize the position of the new button
   const containerHeight = container.getBoundingClientRect().height;
   const containerWidth = container.getBoundingClientRect().width;
-  const btnHeight = button.getBoundingClientRect().height;
-  const btnWidth = button.getBoundingClientRect().width;
+  const btnHeight = newBtnNo.getBoundingClientRect().height;
+  const btnWidth = newBtnNo.getBoundingClientRect().width;
 
-  let newTop = getRandomNumber(0, containerHeight - btnHeight);
-  let newLeft = getRandomNumber(0, containerWidth - btnWidth);
+  const randomTop = Math.random() * (containerHeight - btnHeight);
+  const randomLeft = Math.random() * (containerWidth - btnWidth);
 
-  button.style.top = Math.floor(newTop) + "px";
-  button.style.left = Math.floor(newLeft) + "px";
+  newBtnNo.style.position = "absolute";
+  newBtnNo.style.top = Math.floor(randomTop) + "px";
+  newBtnNo.style.left = Math.floor(randomLeft) + "px";
+
+  // Add event listener to the new button
+  newBtnNo.addEventListener("click", () => {
+    btnYes.classList.add("hide");
+    imageOne.classList.add("hide");
+    imageTwo.classList.remove("hide");
+  });
+
+  // Move the button on mouseover
+  newBtnNo.addEventListener("mouseover", () => {
+    createNoButton(); // Create a new button on mouseover
+    newBtnNo.remove(); // Remove the current button
+  });
 }
 
-// Get random number function
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// Initial setup for the first "No" button
+createNoButton();
 
-// Initial "No" button mouseover event
-btnNo.addEventListener("mouseover", () => {
-  positionButton(btnNo);
-});
-
-// "Yes" button click event
 btnYes.addEventListener("click", (e) => {
   btnNo.classList.add("hide");
   imageOne.classList.add("hide");
-  imageTwo.classList.remove("hide();
+  imageTwo.classList.remove("hide");
 });
-
-// Initial positioning for the original "No" button
-positionButton(btnNo);
-
-// Create the initial "No" button
-createNewNoButton();
