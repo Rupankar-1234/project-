@@ -1,45 +1,65 @@
+// JavaScript code
 const container = document.getElementById("container");
 const imageOne = document.querySelector(".image-1");
 const imageTwo = document.querySelector(".image-2");
 const btnYes = document.querySelector(".btn-yes");
-const btnNo = document.querySelector(".btn-no");
 
-function getRandomNumber(min, max) {
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomNumber;
+// Function to create a new "No" button
+function createNewNoButton() {
+  const newBtnNo = document.createElement("button");
+  newBtnNo.classList.add("btn", "btn-no");
+  newBtnNo.innerText = "No";
+  newBtnNo.style.position = "absolute"; // Ensure it's positioned absolutely
+  container.appendChild(newBtnNo);
+
+  // Randomly position the new button
+  positionButton(newBtnNo);
+
+  // Add mouseover event listener for the new button
+  newBtnNo.addEventListener("mouseover", () => {
+    positionButton(newBtnNo);
+  });
+
+  // Add click event listener for the new button
+  newBtnNo.addEventListener("click", (e) => {
+    imageOne.classList.add("hide");
+    imageTwo.classList.remove("hide");
+    newBtnNo.classList.add("hide");
+  });
 }
 
-btnNo.addEventListener("mouseover", (event) => {
+function positionButton(button) {
   const containerHeight = container.getBoundingClientRect().height;
   const containerWidth = container.getBoundingClientRect().width;
-  const btnHeight = btnNo.getBoundingClientRect().height;
-  const btnWidth = btnNo.getBoundingClientRect().width;
-  const btnTop = btnNo.getBoundingClientRect().top;
-  const btnLeft = btnNo.getBoundingClientRect().left;
+  const btnHeight = button.getBoundingClientRect().height;
+  const btnWidth = button.getBoundingClientRect().width;
 
-  let newTop = btnTop;
-  let newLeft = btnLeft;
-  while (Math.abs(newTop - btnTop) < containerHeight / 3) {
-    newTop = getRandomNumber(0, containerHeight - btnHeight);
-  }
+  let newTop = getRandomNumber(0, containerHeight - btnHeight);
+  let newLeft = getRandomNumber(0, containerWidth - btnWidth);
 
-  while (Math.abs(newLeft - btnLeft) < containerWidth / 3) {
-    newLeft = getRandomNumber(0, containerWidth - btnWidth);
-  }
+  button.style.top = Math.floor(newTop) + "px";
+  button.style.left = Math.floor(newLeft) + "px";
+}
 
-  btnNo.style.top = Math.floor(newTop) + "px";
-  btnNo.style.left = Math.floor(newLeft) + "px";
-  
-  btnNo.blur(); // Remove selection when the button is moved
+// Get random number function
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Initial "No" button mouseover event
+btnNo.addEventListener("mouseover", () => {
+  positionButton(btnNo);
 });
 
-btnNo.addEventListener("click", (e) => {
-  btnNo.blur(); // Remove selection when clicked
-  // Any additional logic for the "No" button can go here
-});
-
+// "Yes" button click event
 btnYes.addEventListener("click", (e) => {
   btnNo.classList.add("hide");
   imageOne.classList.add("hide");
-  imageTwo.classList.remove("hide");
+  imageTwo.classList.remove("hide();
 });
+
+// Initial positioning for the original "No" button
+positionButton(btnNo);
+
+// Create the initial "No" button
+createNewNoButton();
