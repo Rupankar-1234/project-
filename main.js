@@ -1,4 +1,3 @@
-
 const container = document.getElementById("container");
 const imageOne = document.querySelector(".image-1");
 const imageTwo = document.querySelector(".image-2");
@@ -6,9 +5,7 @@ const btnYes = document.querySelector(".btn-yes");
 const btnNo = document.querySelector(".btn-no");
 
 function getRandomNumber(min, max) {
-  // Calculate the random number between min and max (inclusive)
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
   return randomNumber;
 }
 
@@ -32,6 +29,13 @@ btnNo.addEventListener("mouseover", (event) => {
 
   btnNo.style.top = Math.floor(newTop) + "px";
   btnNo.style.left = Math.floor(newLeft) + "px";
+  
+  btnNo.blur(); // Remove selection when the button is moved
+});
+
+btnNo.addEventListener("click", (e) => {
+  btnNo.blur(); // Remove selection when clicked
+  // Any additional logic for the "No" button can go here
 });
 
 btnYes.addEventListener("click", (e) => {
